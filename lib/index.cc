@@ -1,7 +1,7 @@
-#include <node.h>
-#include <nan.h>
-#include <iostream>
 #include <fstream>
+#include <iostream>
+#include <nan.h>
+#include <node.h>
 
 namespace uh_no_eval {
 
@@ -14,7 +14,7 @@ using v8::Value;
 
 namespace dynamic_eval {
 
-    const char* kEvalCallbackKey = "eval_callback_key";
+    const char *kEvalCallbackKey = "eval_callback_key";
 
     bool dynamic_callback(Local<v8::Context> ctx, Local<String> str) {
         auto global = ctx->Global();
@@ -36,7 +36,7 @@ namespace dynamic_eval {
         return should_eval;
     }
 
-    void set_eval_allowed(const FunctionCallbackInfo<Value>& args) {
+    void set_eval_allowed(const FunctionCallbackInfo<Value> &args) {
         auto ctx = Nan::GetCurrentContext();
         auto isolate = ctx->GetIsolate();
         auto global = ctx->Global();
@@ -57,7 +57,7 @@ namespace dynamic_eval {
             Nan::ThrowTypeError("Argument 0 must be a function or boolean");
         }
     }
-}
+} // namespace dynamic_eval
 
 void Initialize(Local<Object> exports) {
     NODE_SET_METHOD(exports, "setEvalAllowed", dynamic_eval::set_eval_allowed);
@@ -65,4 +65,4 @@ void Initialize(Local<Object> exports) {
 
 NODE_MODULE(NODE_GYP_MODULE_NAME, Initialize)
 
-}
+} // namespace uh_no_eval
