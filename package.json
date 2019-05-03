@@ -19,9 +19,9 @@
     "node-gyp": "^3.8.0"
   },
   "devDependencies": {
-    "expect": "^24.5.0",
-    "mocha": "^6.0.2",
+    "expect": "24.5.0",
+    "mocha": "6.0.2",
     "prettier": "1.16.4",
-    "sinon": "^7.3.0"
+    "sinon": "7.3.0"
   }
 }
