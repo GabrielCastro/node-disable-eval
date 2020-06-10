@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "expect": "24.9.0",
-    "mocha": "6.2.0",
+    "mocha": "8.0.1",
     "prettier": "1.18.2",
     "sinon": "7.5.0"
   }
