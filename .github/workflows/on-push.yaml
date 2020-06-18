@@ -1,22 +1,39 @@
 name: Node.js CI
 
-on: [push]
+'on': [push]
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
+  test-node:
+    runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        os: [macos-latest, ubuntu-18.04]
+        node-version: [10.x, 12.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn install --pure-lockfile
+      - run: yarn test
+      - run: yarn run prettier
+  fmt-c:
+    runs-on: ubuntu-18.04
+    name: 'Format C++ & Yaml Code'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Python to format C++
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - run: pip install yamllint
+      - run:
+          - /bin/bash
+          - -c
+          - |
+            set +o noglob
+            find lib -name '*.cc' -0 | xargs -0 ./run-clang-format.py -r
+      - run: yamllint .

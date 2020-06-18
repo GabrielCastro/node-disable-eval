@@ -4,4 +4,5 @@ IndentWidth: 4
 NamespaceIndentation: Inner
 ColumnLimit: 180
 AllowShortFunctionsOnASingleLine: None
-# clang-format -style=file -output-replacements-xml **/*.cc | grep -c "<replacement " >/dev/null
+# clang-format -style=file -output-replacements-xml **/*.cc \
+# | grep -c "<replacement " >/dev/null
