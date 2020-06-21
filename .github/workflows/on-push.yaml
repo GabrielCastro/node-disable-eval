@@ -30,10 +30,7 @@ jobs:
         with:
           python-version: 3.8
       - run: pip install yamllint
-      - run:
-          - /bin/bash
-          - -c
-          - |
-            set +o noglob
-            find lib -name '*.cc' -0 | xargs -0 ./run-clang-format.py -r
+      - run: |
+          set +o noglob ;
+          find lib -name '*.cc' -printf '%h\0\c' | xargs -0 ./run-clang-format.py -r
       - run: yamllint .
