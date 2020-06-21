@@ -52,3 +52,19 @@ describe("with a callback", () => {
     sinon.assert.calledWith(stub, `(function anonymous(\n) {\nreturn 1\n})`);
   });
 });
+
+describe('Override for "return this" global', () => {
+  it("should always return the global object even with eval off", () => {
+    setEvalAllowed(false);
+
+    expect(new Function("return this;")()).toBe(global);
+    expect(new Function(" return this ")()).toBe(global);
+    expect(
+      new Function(`
+        return  this
+
+        ;
+    `)()
+    ).toBe(global);
+  });
+});
