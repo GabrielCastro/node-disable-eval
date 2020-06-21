@@ -1,0 +1,17 @@
+extends: default
+yaml-files:
+  - '*.yaml'
+  - '*.yml'
+  - '.yamllint'
+  - '.clang-format'
+
+ignore: |
+  /node_modules/
+
+rules:
+  document-start: disable
+  new-line-at-end-of-file: enable
+  new-lines:
+    type: unix
+  truthy:
+    level: error
