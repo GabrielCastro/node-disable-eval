@@ -19,7 +19,7 @@
     "node-gyp": "^7.0.0"
   },
   "devDependencies": {
-    "expect": "26.0.1",
+    "expect": "29.7.0",
     "mocha": "8.0.1",
     "prettier": "2.0.5",
     "sinon": "9.0.2"
